@@ -15,10 +15,10 @@ fun main(): Unit = with(BufferedReader(InputStreamReader(System.`in`))) {
         checkList.add(false)
     }
 
-    for (i in 0 until num) {
-        //println("<$i>")
-        pickNum(checkList.toMutableList(), i, 0, i)
-    }
+ 
+  
+    pickNum(checkList.toMutableList(), 0, 0, 0)
+    
 
     println(minPrice)
 
