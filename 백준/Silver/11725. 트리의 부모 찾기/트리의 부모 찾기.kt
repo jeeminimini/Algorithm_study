@@ -2,7 +2,17 @@ package jimin.`6week`
 
 import java.io.BufferedReader
 import java.io.InputStreamReader
+/*
+<문제>
+[트리의 부모 찾기] (https://www.acmicpc.net/problem/11725)
 
+<구현 방법>
+입력으로 주어진 정보를 map에 담아 정리하였다.
+이를 bfs로 돌면서 parent 정보를 기록하였다.
+
+<트러블 슈팅>
+parent를 기록해야한다는 아이디어 참고함.
+ */
 
 fun main(): Unit = with(BufferedReader(InputStreamReader(System.`in`))) {
     val n = readLine().toInt()
@@ -16,25 +26,22 @@ fun main(): Unit = with(BufferedReader(InputStreamReader(System.`in`))) {
     }
 
 
-    bfs(treeList, MutableList(n + 1) { i -> false }, MutableList(n + 1) { i -> 0 })
+    bfs(treeList,MutableList(n + 1) { i -> 0 })
 
 
 }
 
-fun bfs(treeList: MutableMap<Int, MutableList<Int>>, visited: MutableList<Boolean>, parent: MutableList<Int>) {
+fun bfs(treeList: MutableMap<Int, MutableList<Int>>, parent: MutableList<Int>) {
     val queue = arrayListOf<Int>()
     queue.add(1)
-    visited[0] = true
-    visited[1] = true
-    parent[0] = 0
-    parent[1] = 0
+    parent[0] = -1
+    parent[1] = -1
 
     while (queue.isNotEmpty()) {
         val v = queue.removeFirst()
         treeList[v]?.forEach {
-            if (visited[it].not()){
+            if (parent[it] == 0){
                 queue.add(it)
-                visited[it] = true
                 parent[it] = v
             }
         }
