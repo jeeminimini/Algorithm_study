@@ -2,6 +2,16 @@ package jimin.`6week`
 
 import java.io.BufferedReader
 import java.io.InputStreamReader
+/*
+<문제>
+[비슷한 단어] (https://www.acmicpc.net/problem/2607)
+
+<구현 방법>
+
+
+<트러블 슈팅>
+
+ */
 
 
 fun main(): Unit = with(BufferedReader(InputStreamReader(System.`in`))) {
@@ -35,13 +45,6 @@ fun main(): Unit = with(BufferedReader(InputStreamReader(System.`in`))) {
                 }
                 if (num == 2) total += 1
             }
-        } else if (masterWord.length == alphabetList[idx].sum() + 1) { // 후보지가 더 길음
-            masterAlphabetList.forEachIndexed { i, n ->
-                if (n > alphabetList[idx][i]) num += n - alphabetList[idx][i]
-                else num += alphabetList[idx][i] - n
-
-            }
-            if (num == 1) total += 1
         } else {
             masterAlphabetList.forEachIndexed { i, n ->
                 if (n > alphabetList[idx][i]) num += n - alphabetList[idx][i]
