@@ -14,10 +14,7 @@ class Solution {
         }
         visited[1] = true
         dfs(1, tree)
-        treeInfo.forEach{
-            answer = min(answer, abs(n - it - it))
-        }
-        return answer
+        return treeInfo.minOf{abs(n - it - it)}
     }
     
     fun dfs(root: Int, tree: MutableList<MutableList<Int>>) {
