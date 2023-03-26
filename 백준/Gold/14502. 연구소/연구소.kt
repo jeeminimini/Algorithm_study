@@ -1,5 +1,17 @@
 package jimin.`28week`
 
+/*
+<문제>
+[연구소](https://www.acmicpc.net/problem/14502)
+
+<구현 방법>
+완탐!
+우선 3가지 벽을 고르는 combination을 만들고,
+그 후 dfs로 바이러스 감염되는 곳을 다 방문하고, 살아남은 곳만 count했다.
+
+<트러블 슈팅>
+*/
+
 import java.lang.Integer.*
 class 연구소 {
     val labs = mutableListOf<MutableList<Int>>()
@@ -55,7 +67,7 @@ class 연구소 {
             for (i in 0 until 4) {
                 if (now.first + dx[i] in 0 until rooms.size && now.second + dy[i] in 0 until rooms.first().size) {
                     if (rooms[now.first + dx[i]][now.second + dy[i]] == EMPTY) {
-                        queue.add(Pair(now.first + dx[i], now.second + dy[i]))
+                        queue.addFirst(Pair(now.first + dx[i], now.second + dy[i]))
                         rooms[now.first + dx[i]][now.second + dy[i]] = VISITED
                     }
                 }
