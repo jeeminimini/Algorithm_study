@@ -1,5 +1,18 @@
 package jimin.`29week`
 
+/*
+<문제>
+[빙산](https://www.acmicpc.net/problem/2573)
+
+<구현 방법>
+1년이 지나 빙산이 녹는 것을 구현하는 age() 함수와 녹은 후 빙산의 개수를 구하는 getMountainNum() 함수를 구현하였다.
+이때 빙산이 녹는 것은 한번에 녹기 때문에 바다 개수를 melting에 담아놓고 한번 더 for문을 써서 빼주었다.
+
+<트러블 슈팅>
+문제를 잘 읽자22
+*/
+
+
 import java.lang.Integer.*
 
 class 빙산 {
@@ -15,10 +28,10 @@ class 빙산 {
 
         while (true) {
             age(n, m)
-            if (getMountainNum(n, m) >= 2) {
+            val num = getMountainNum(n, m)
+            if (num >= 2) {
                 break
-            }
-            if (mountains.sumOf{ it.sumOf{ it } } == 0) {
+            } else if (num == 0) {
                 result = 0
                 break
             }
