@@ -2,14 +2,14 @@ def solution(routes):
     maxi = max(map(max, routes))
     mini = min(map(min, routes))
     
-    routes = sorted(routes, key = lambda x: x[1])
+    routes = sorted(routes)
     
     idx_s = 0
     idx_n = 1
     total = 0
     
     while True:
-        # print(f"idx_s {idx_s} idx_n {idx_n}")
+        print(f"idx_s {idx_s} idx_n {idx_n}")
         if idx_n == len(routes):
             break
         if routes[idx_s][1] < routes[idx_n][0]:
