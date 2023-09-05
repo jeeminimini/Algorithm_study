@@ -1,17 +1,25 @@
-from collections import deque
-import heapq
+def canJump(n, k, stones):
+    num = 0
+    maxi = 0
+    for s in stones:
+        if s <= n:
+            num += 1
+        else:
+            num = 0
+        if num == k:
+            return False
+    return True
 
 def solution(stones, k):
-    q = []
+    stones_length = len(stones)
+    start = 0
+    end = max(stones)
     
-    for i in range(0, k - 1):
-        heapq.heappush(q, [-stones[i], i])
+    while start <= end:
+        mid = (start + end) // 2
+        if canJump(mid, k, stones):
+            start = mid + 1
+        else:
+            end = mid - 1
     
-    mini = 200000001
-    for i in range(k - 1, len(stones)):
-        heapq.heappush(q, [-stones[i], i])
-        while q and q[0][1] < i - (k - 1):
-            heapq.heappop(q)
-        mini = min(mini, -q[0][0])
-        
-    return mini
+    return start
