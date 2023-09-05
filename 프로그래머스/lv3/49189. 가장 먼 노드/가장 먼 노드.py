@@ -24,5 +24,5 @@ def solution(n, edge):
                 visited[m] = visited[now] + 1
                 queue.append(m)
         
-    result = sum(map(lambda x: 1 if x == max(visited) else 0, visited))
+    result = visited.count(max(visited))
     return result
