@@ -1,30 +1,34 @@
-from itertools import permutations
-
 n = int(input())
-numbers = list(map(int, input().split()))
+a = list(map(int, input().split()))
 operators = list(map(int, input().split()))
-operators_list = []
-for i in range(4):
-    for j in range(operators[i]):
-        operators_list.append(i)
+maxi = -100000000000
+mini = 100000000000
 
-result_max = -98765434210
-result_min = 98765434210
-for permu in permutations(operators_list):
-    num = numbers[0]
-    for idx, p in enumerate(permu):
-        if p == 0:  # +
-            num += numbers[idx + 1]
-        elif p == 1:  # -
-            num -= numbers[idx + 1]
-        elif p == 2:
-            num *= numbers[idx + 1]
-        else:
-            if num < 0 < numbers[idx + 1]:
-                num = (num * (-1) // numbers[idx + 1]) * (-1)
+def calculate(idx, now):
+    global maxi, mini
+    if idx == len(a):
+        maxi = max(maxi, now)
+        mini = min(mini, now)
+        return
+
+    for i in range(4):
+        if operators[i] != 0:
+            operators[i] -= 1
+            if i == 0:
+                new = now + a[idx]
+            elif i == 1:
+                new = now - a[idx]
+            elif i == 2:
+                new = now * a[idx]
             else:
-                num = num // numbers[idx + 1]
-    result_max = max(result_max, num)
-    result_min = min(result_min, num)
-print(result_max)
-print(result_min)
+                if now < 0:
+                    new = -(-now // a[idx])
+                else:
+                    new = now // a[idx]
+            calculate(idx + 1, new)
+            operators[i] += 1
+
+
+calculate(1, a[0])
+print(maxi)
+print(mini)
