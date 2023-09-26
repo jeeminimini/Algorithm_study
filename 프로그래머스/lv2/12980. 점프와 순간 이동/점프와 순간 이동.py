@@ -1,12 +1,11 @@
 import math
-def make2digit(n, s):
+def make2digit(n, num):
     if n == 1:
-        return '1' + s
+        return num + 1
     else: 
-        return make2digit(n // 2, str(n % 2) + s) 
+        return make2digit(n // 2, num + n % 2) 
 
 
 def solution(n):
-    # s = make2digit(n, '')
-    result = len(bin(n)[2:].replace('0', ''))
+    result = make2digit(n, 0)
     return result
