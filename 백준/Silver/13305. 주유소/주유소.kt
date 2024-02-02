@@ -1,31 +1,44 @@
-package jimin.`3week`
+package jimin
 
 import java.io.BufferedReader
+import java.io.BufferedWriter
 import java.io.InputStreamReader
+import java.io.OutputStreamWriter
 
-data class GasStation(
-    val roadLength: Int,
-    val oilPrice: Int
-)
+fun main(){
+    val br = BufferedReader(InputStreamReader(System.`in`))
+    val bw = BufferedWriter(OutputStreamWriter(System.out))
 
-fun main(): Unit = with(BufferedReader(InputStreamReader(System.`in`))) {
-    val infoList = ArrayList<GasStation>()
-    val num = readLine().toInt()
-    val length = readLine().split(" ").map { it.toInt() }.toMutableList()
-    length.add(0, 0)
-    val price = readLine().split(" ").map { it.toInt() }
-    repeat(num) { i ->
-        infoList.add(GasStation(length[i], price[i]))
-    }
+    val n = br.readLine().toInt()
+    val roads = br.readLine().split(" ").map{ it.toLong() }
+    val oils = br.readLine().split(" ").map{ it.toLong() }
+    var cost = 0L
+    var idx = 0
 
-    var totalCharge = 0
-    var nowPrice = infoList[0].oilPrice
-    for (i in 1 until infoList.size){
-        totalCharge += nowPrice * infoList[i].roadLength
-        if (nowPrice > infoList[i].oilPrice) {
-            nowPrice = infoList[i].oilPrice
+    while (idx < n - 1){
+        if (oils[idx] >= oils[idx + 1]) {
+            cost += oils[idx] * roads[idx]
+            idx += 1
+            //bw.write("크다 idx $idx now price ${oils[idx - 1] * roads[idx - 1]}\n")
+        } else {
+            val cheaper = oils[idx]
+            while (idx < n - 1 && cheaper < oils[idx + 1]) {
+                cost += cheaper * roads[idx]
+                idx += 1
+                //bw.write("작다1 idx $idx now price ${cheaper * roads[idx - 1]} cheaper $cheaper \n")
+            }
+            if (idx < n - 1) {
+                cost += cheaper * roads[idx]
+                idx += 1
+            }
+            //bw.write("작다2 idx $idx now price ${cheaper * roads[idx - 1]} cheaper $cheaper \n")
+
         }
+        //bw.write("idx $idx cost $cost \n")
     }
 
-    println(totalCharge)
+    bw.write("$cost\n")
+
+    bw.flush()
+    bw.close()
 }
