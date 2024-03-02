@@ -23,6 +23,7 @@ class Solution {
                     
                     nowD = newD;
                     deliveries[i]  = newDelivery;
+                    dLast = i;
                 }
                 if (nowD == 0) {
                     break;
@@ -36,6 +37,7 @@ class Solution {
                     
                     nowP = newP;
                     pickups[i]  = newPickup;
+                    pLast = i;
                 }
                 if (nowP == 0) {  
                     break;
