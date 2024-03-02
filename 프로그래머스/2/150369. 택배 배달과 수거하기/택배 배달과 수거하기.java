@@ -15,53 +15,33 @@ class Solution {
         
         while (dLast >= 0 || pLast >= 0) {
             answer += (Math.max(dLast, pLast) + 1) * 2;
+            
             for(int i = dLast; i >= 0; i--) {
                 if (deliveries[i] > 0) {
-                    if (deliveries[i] <= nowD) {
-                        nowD -= deliveries[i];
-                        deliveries[i] = 0;
-                        dLast = i - 1;
-                    } else {
-                        deliveries[i] -= nowD;
-                        nowD = 0;
-                        dLast = i;
-                    }
+                    int newD = Math.max(nowD - deliveries[i], 0);
+                    int newDelivery = Math.max(deliveries[i] - nowD, 0);
+                    
+                    nowD = newD;
+                    deliveries[i]  = newDelivery;
                 }
                 if (nowD == 0) {
                     break;
                 }
             }
             
-            if (nowD != 0) {
-                dLast = -1;
-            } 
-            
-            //System.out.println(Arrays.toString(deliveries) + nowD + dLast);
-            
-            
             for(int i = pLast; i >= 0; i--) {
                 if (pickups[i] > 0) {
-                    if (pickups[i] <= nowP) {
-                        nowP -= pickups[i];
-                        pickups[i] = 0;
-                        pLast = i - 1;
-                    } else {
-                        pickups[i] -= nowP;
-                        nowP = 0;
-                        pLast = i;
-                    }
+                    int newP = Math.max(nowP - pickups[i], 0);
+                    int newPickup = Math.max(pickups[i] - nowP, 0);
+                    
+                    nowP = newP;
+                    pickups[i]  = newPickup;
                 }
                 if (nowP == 0) {  
                     break;
                 }
             }
-            
-            if (nowP != 0) {
-                pLast = -1;
-            } 
-            
-           // System.out.println(answer);
-                
+             
             nowD = cap;
             nowP = cap;
             
