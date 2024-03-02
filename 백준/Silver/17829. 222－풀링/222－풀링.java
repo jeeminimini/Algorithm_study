@@ -21,24 +21,18 @@ class Main {
             }
         }
 
-        int[][] newNumbers = new int[n / 2][n / 2];
-
         while (n > 1) {
-            newNumbers = new int[n / 2][n / 2];
-
             for (int i = 0; i < n; i += 2) {
                 for (int j = 0; j < n; j += 2) {
                     int [] polling = {numbers[i][j], numbers[i + 1][j], numbers[i][j + 1], numbers[i + 1][j + 1]};
                     Arrays.sort(polling);
-                    newNumbers[i / 2][j / 2] = polling[2];
+                    numbers[i / 2][j / 2] = polling[2];
                 }
             }
 
             n /= 2;
-            numbers = newNumbers.clone();
         }
 
-        System.out.println(newNumbers[0][0]);
-
+        System.out.println(numbers[0][0]);
     }
 }
