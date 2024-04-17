@@ -6,12 +6,7 @@ def solution(w,h):
         if w % i == 0 and h % i == 0:
             gcd = i
             break
-            
-    origin = w*h
-    typ = w // gcd + h // gcd - 1
-    count = w // (w // gcd)
     
-    # print(origin, typ, count)
-    answer = origin - typ * count 
+    answer = w*h - (w // gcd + h // gcd - 1) * (w // (w // gcd)) 
     
     return answer
