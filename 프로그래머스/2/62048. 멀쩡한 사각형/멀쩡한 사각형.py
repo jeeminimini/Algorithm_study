@@ -7,6 +7,6 @@ def solution(w,h):
             gcd = i
             break
     
-    answer = w*h - (w // gcd + h // gcd - 1) * (w // (w // gcd)) 
+    answer = w*h - (w // gcd + h // gcd - 1) * gcd
     
     return answer
