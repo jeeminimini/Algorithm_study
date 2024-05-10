@@ -1,44 +1,40 @@
 import sys
 
 n = int(sys.stdin.readline())
-P = list(map(int, sys.stdin.readline().split()))
-S = list(map(int, sys.stdin.readline().split()))
-card = [i for i in range(n)]
-player = [0, 1, 2]
+answer_type = list(map(int, sys.stdin.readline().split()))
+shaking_type = list(map(int, sys.stdin.readline().split()))
 
-tmp = 0
+result = [[] for _ in range(3)]
 for i in range(n):
-    if P[i] == player[i % 3]:
-        tmp += 1
-    else:
-        break
+    result[answer_type[i]].append(i)
 
-if tmp == n:
-    print("0")
-    sys.exit()
-
+num = 0
+now = [i for i in range(n)]
+tmp = [0 for _ in range(n)]
 origin = [i for i in range(n)]
-count = 1
-while True:
-    new_card = [0 for _ in range(n)]
-    for i in range(n):
-        new_card[S[i]] = card[i]
-
-    if new_card == origin:
-        print(-1)
-        sys.exit()
-
-    tmp = 0
-    for i in range(n):
-        if P[new_card[i]] == player[i % 3]:
-            tmp += 1
-        else:
+isOver = False
+while not isOver:
+    isOver = True
+    for i in range(0, n, 3):
+        for j in range(3):
+            if now[i + j] not in result[j]:
+                isOver = False
+                break
+        if not isOver:
             break
 
-    if tmp == n:
+    if isOver:
         break
 
-    card = new_card
-    count += 1
+    for i in range(n):
+        tmp[shaking_type[i]] = now[i]
 
-print(count)
+    if tmp == origin :
+        # print(num, tmp)
+        num = -1
+        break
+
+    now = tmp[:]
+    num += 1
+
+print(num)
